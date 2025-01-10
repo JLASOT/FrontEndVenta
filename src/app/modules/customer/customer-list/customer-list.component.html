@@ -1,0 +1,38 @@
+<div *ngIf="errorMessage; else customerList">
+    <p class="error-message">{{ errorMessage }}</p>
+  </div>
+  <button routerLink="/customer/register">Nuevo</button>
+  
+  <ng-template #customerList>
+    <div class="table-container">
+      <table class="customer-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+            <th>Empresa</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Email</th>
+            <th>Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers">
+            <td>{{ customer.idCustomer }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.pSurname }}</td>
+            <td>{{ customer.mSurname }}</td>
+            <td>{{ customer.company }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>{{ customer.address }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.type }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+  
