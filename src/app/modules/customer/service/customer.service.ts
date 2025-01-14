@@ -32,6 +32,18 @@ export class CustomerService {
     }
   }
 
+   // Obtener un cliente por su ID
+   public getCustomerById(id: number): Observable<Customer> {
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      return this.http.get<Customer>(`${URL_SERVICIOS}/customer/${id}`, httpOptions(token)).pipe(
+        catchError(this.handleError<Customer>(`getCustomerById id=${id}`))
+      );
+    } else {
+      return of({} as Customer); // Devuelve un objeto vacío si no hay token
+    }
+  }
+
     // Crear un nuevo cliente
     public createCustomer(customer: Customer): Observable<Customer> {
       const token = sessionStorage.getItem('token');  // Obtener el token del localStorage

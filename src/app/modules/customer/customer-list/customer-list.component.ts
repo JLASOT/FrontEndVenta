@@ -33,4 +33,21 @@ export class CustomerListComponent implements OnInit {
       },
     });
   }
+  deleteCustomer(id: number): void {
+    
+      this.customerService.deleteCustomer(id).subscribe(
+        () => {
+          // Actualizar la lista de clientes después de eliminar
+          this.customers = this.customers.filter(customer => customer.idCustomer !== id);
+          
+        },
+        (error) => {
+          console.error('Error al eliminar el cliente:', error);
+          alert('Hubo un problema al eliminar el cliente.');
+        }
+      );
+    
+  }
+  
+
 }

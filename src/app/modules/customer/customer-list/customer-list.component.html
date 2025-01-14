@@ -1,38 +1,57 @@
 <div *ngIf="errorMessage; else customerList">
-    <p class="error-message">{{ errorMessage }}</p>
+  <p class="alert alert-danger">{{ errorMessage }}</p>
+</div>
+
+<ng-template #customerList>
+  <br>
+  <button routerLink="/customer/register" class="btn btn-outline-primary mb-3">Nuevo Cliente</button>
+
+  <div class="table-responsive" >
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido Paterno</th>
+          <th scope="col">Apellido Materno</th>
+          <th scope="col">Empresa</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Email</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers">
+          <th scope="row">{{ customer.idCustomer }}</th>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.pSurname }}</td>
+          <td>{{ customer.mSurname }}</td>
+          <td>{{ customer.company }}</td>
+          <td>{{ customer.phone }}</td>
+          <td>{{ customer.address }}</td>
+          <td>{{ customer.email }}</td>
+          <td>{{ customer.type }}</td>
+          <td>
+            <!-- Botón para editar -->
+            <button 
+              class="btn btn-warning btn-sm" 
+              [routerLink]="['/customer/edit', customer.idCustomer]"
+            >
+              Editar
+            </button>
+
+            <!-- Botón para eliminar -->
+            <button 
+              class="btn btn-danger btn-sm" 
+              (click)="deleteCustomer(customer.idCustomer)"
+            >
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <button routerLink="/customer/register">Nuevo</button>
-  
-  <ng-template #customerList>
-    <div class="table-container">
-      <table class="customer-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
-            <th>Empresa</th>
-            <th>Teléfono</th>
-            <th>Dirección</th>
-            <th>Email</th>
-            <th>Tipo</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let customer of customers">
-            <td>{{ customer.idCustomer }}</td>
-            <td>{{ customer.name }}</td>
-            <td>{{ customer.pSurname }}</td>
-            <td>{{ customer.mSurname }}</td>
-            <td>{{ customer.company }}</td>
-            <td>{{ customer.phone }}</td>
-            <td>{{ customer.address }}</td>
-            <td>{{ customer.email }}</td>
-            <td>{{ customer.type }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </ng-template>
-  
+</ng-template>

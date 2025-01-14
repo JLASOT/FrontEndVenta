@@ -193,6 +193,12 @@ export class AuthService {
     );
   }
 
+    // Función de logout
+    public logout(): void {
+      // Eliminar el token del almacenamiento (puede ser sessionStorage o localStorage)
+      sessionStorage.removeItem('token');
+    }
+
   private handleError(error: any) {
     console.error("AuthService error", error);
     return throwError(() => new Error("Error de autenticación: " + error.message));

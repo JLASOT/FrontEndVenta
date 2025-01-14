@@ -28,12 +28,18 @@ export class LoginComponent implements OnInit {
         this.errorMessage = error.message;
         console.error("Error en login", this.errorMessage);
         this.router.navigate(['/auth/login']);
+        alert("credenciales incorrectas");
       }
     );
   }
 
+  public logout():void{
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
+  }
+
   private redirectToDashboard(): void {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/sale/lista']);
   }
 
 }

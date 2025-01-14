@@ -1,0 +1,116 @@
+/* Contenedor principal del formulario */
+.sale-form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Título del formulario */
+  .sale-form-container h2 {
+    text-align: center;
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Estilo para los campos del formulario */
+  .sale-form-container div {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sale-form-container label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .sale-form-container input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Cambiar color del borde cuando el campo está en foco */
+  .sale-form-container input:focus {
+    border-color: #007bff;
+  }
+  
+  /* Botones */
+  .sale-form-container button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #007bff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-right: 10px;
+  }
+  
+  .sale-form-container button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  .sale-form-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Estilo para el botón "Eliminar Detalle" */
+  .sale-form-container button[type="button"] {
+    background-color: #dc3545;
+    margin-top: 0.5rem;
+  }
+  
+  .sale-form-container button[type="button"]:hover {
+    background-color: #c82333;
+  }
+  
+  /* Espaciado entre los botones */
+  .sale-form-container button + button {
+    margin-top: 1rem;
+  }
+  
+  /* Estilo para los detalles de la venta */
+  .sale-form-container div[formArrayName="saleDetails"] {
+    margin-bottom: 1.5rem;
+  }
+  
+  .sale-form-container div[formArrayName="saleDetails"] > div {
+    background-color: #f1f1f1;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+  }
+  
+  .sale-form-container div[formArrayName="saleDetails"] > div label {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* Espaciado y estilo para los inputs dentro de los detalles */
+  .sale-form-container div[formArrayName="saleDetails"] input {
+    font-size: 0.9rem;
+  }
+  
+  .sale-form-container div[formArrayName="saleDetails"] button[type="button"] {
+    background-color: #ff5722;
+    color: #fff;
+    margin-top: 0.8rem;
+  }
+  
+  .sale-form-container div[formArrayName="saleDetails"] button[type="button"]:hover {
+    background-color: #e64a19;
+  }
+  

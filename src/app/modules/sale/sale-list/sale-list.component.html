@@ -1,0 +1,87 @@
+
+  
+  <div *ngIf="errorMessage; else saleList">
+    <p class="error-message">{{ errorMessage }}</p>
+  </div>
+  
+  <ng-template #saleList>
+    <br>
+    <button routerLink="/sale/register" class="btn btn-outline-primary mb-3">Nueva Venta</button>
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">ID Venta</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Detalles</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sale of sales">
+            <th scope="row">{{ sale.idSale }}</th>
+            <td>{{ sale.date | date:'dd/MM/yyyy' }}</td>
+            <td >{{ sale.amount | currency:'BOB ' }}</td>
+            <td>{{ sale.idCustomer || 'Cliente no encontrado' }}</td>
+            <td>
+              <button 
+                class="btn btn-info btn-sm" 
+                (click)="viewSaleDetails(sale.idSale)"
+              >
+                Ver Detalles
+              </button>
+            </td>
+            <td>
+              <button 
+                class="btn btn-danger btn-sm" 
+                (click)="deleteSale(sale.idSale)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+  
+<!-- Modal de Detalles -->
+<div class="modal" tabindex="-1" [class.show]="isModalOpen" [style.display]="isModalOpen ? 'block' : 'none'" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!-- Encabezado del Modal -->
+        <div class="modal-header">
+          <h5 class="modal-title">Detalles de la Venta</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+  
+        <!-- Cuerpo del Modal -->
+        <div class="modal-body">
+          <div *ngIf="selectedSale">
+            <p><strong>ID de la Venta:</strong> {{ selectedSale.idSale }}</p>
+            <p><strong>Cliente:</strong> {{ selectedSale.customerName }}</p>
+            <p><strong>Fecha de la Venta:</strong> {{ selectedSale.date | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Monto Total:</strong> {{ selectedSale.amount | currency: 'BOB ' }}</p>
+            <h5>Detalles de Productos</h5>
+            <ul>
+              <li *ngFor="let detail of selectedSale.saleDetails">
+                <p><strong>Producto:</strong> {{ detail.product }}</p>
+                <p><strong>Cantidad:</strong> {{ detail.quantity }}</p>
+                <p><strong>Precio:</strong> {{ detail.precioV | currency: 'BOB ' }}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <!-- Pie del Modal -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

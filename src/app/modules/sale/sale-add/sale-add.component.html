@@ -1,0 +1,64 @@
+<div class="sale-form-container">
+  <h2>Registrar Venta</h2>
+  <form (ngSubmit)="onSubmit()" #saleForm="ngForm">
+    <div>
+      <input type="hidden" [(ngModel)]="sale.date" name="date" />
+    </div>
+
+    <!-- Selección de cliente -->
+    <div>
+      <label for="idCustomer" class="form-label mt-4">Cliente</label>
+      <select class="form-select" id="idCustomer" [(ngModel)]="sale.idCustomer" name="idCustomer" required #idCustomer="ngModel">
+        <option value="" disabled selected>Seleccione un cliente</option>
+        <option *ngFor="let customer of customers" [value]="customer.idCustomer">
+          {{ customer.name }}
+        </option>
+      </select>
+      <div *ngIf="!sale.idCustomer">
+        <small class="error">Por favor, seleccione un cliente válido.</small>
+      </div>
+    </div>
+
+    <!-- Detalles de la venta -->
+    <div>
+      <h3>Detalles de la Venta</h3>
+      <div *ngFor="let detail of sale.saleDetails; let i = index">
+        <div>
+          <label for="product-{{ i }}">Producto</label>
+          <input id="product-{{ i }}" [(ngModel)]="detail.product" name="product-{{ i }}" type="text" required #product="ngModel" />
+          <div *ngIf="product.invalid && product.touched">
+            <small class="error">El campo Producto es obligatorio.</small>
+          </div>
+        </div>
+        <div>
+          <label for="quantity-{{ i }}">Cantidad</label>
+          <input id="quantity-{{ i }}" [(ngModel)]="detail.quantity" name="quantity-{{ i }}" type="number" min="1" required #quantity="ngModel" />
+          <div *ngIf="quantity.invalid && quantity.touched">
+            <small class="error">La cantidad debe ser mayor que 0.</small>
+          </div>
+        </div>
+        <div>
+          <label for="precioV-{{ i }}">Precio</label>
+          <input id="precioV-{{ i }}" [(ngModel)]="detail.precioV" name="precioV-{{ i }}" type="number" min="0" required #precioV="ngModel" />
+          <div *ngIf="precioV.invalid && precioV.touched">
+            <small class="error">El precio debe ser un valor mayor que 0.</small>
+          </div>
+        </div>
+        <button type="button" (click)="removeSaleDetail(i)">Eliminar Detalle</button>
+      </div>
+    </div>
+
+    <!-- Agregar nuevo detalle -->
+    <button type="button" (click)="addSaleDetail()">Agregar Producto</button>
+
+    <!-- Mensaje de error si no hay detalles -->
+    <div *ngIf="sale.saleDetails.length === 0">
+      <small class="error">Debe agregar al menos un producto para registrar la venta.</small>
+    </div>
+
+    <!-- Botón de envío -->
+    <button type="submit" [disabled]="saleForm.invalid || !sale.idCustomer || sale.saleDetails.length === 0">
+      Registrar Venta
+    </button>
+  </form>
+</div>

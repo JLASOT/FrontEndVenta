@@ -26,7 +26,7 @@ export class CustomerAddComponent implements OnInit{
       pSurname: ['', Validators.required],
       mSurname: ['', Validators.required],
       company: ['', Validators.required],
-      phone: ['', Validators.required,Validators.pattern('^[0-9]*$')],
+      phone: ['', Validators.required],
       address: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       type: ['', Validators.required]
