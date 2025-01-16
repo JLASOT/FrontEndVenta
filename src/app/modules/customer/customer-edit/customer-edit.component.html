@@ -1,5 +1,5 @@
 <div class="customer-add-container">
-  <h2>Agregar Cliente</h2>
+  <h2>Editar Cliente</h2>
   
   <!-- Mostrar mensaje de error si hay uno -->
   <div *ngIf="errorMessage" class="error-message">
@@ -43,12 +43,24 @@
       <input id="email" formControlName="email" type="email" />
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="type">Tipo</label>
       <input id="type" formControlName="type" type="text" />
+    </div> -->
+
+    <div class="form-group">
+      <label for="type">Tipo</label>
+      <select class="form-select" id="type" formControlName="type" required>
+        <option value="" disabled selected>Seleccione un tipo</option>
+        <option value="Juridico">Juridico</option>
+        <option value="Natural">Natural</option>
+      </select>
+      <div *ngIf="customerForm.get('type')?.invalid && customerForm.get('type')?.touched">
+        <small class="error">Por favor, seleccione un tipo válido.</small>
+      </div>
     </div>
 
-    <button type="submit" [disabled]="customerForm.invalid">Actualizar</button>
-    <button [routerLink]="['/customer/lista']">Cancelar</button>    
+    <button type="submit" class="btn btn-outline-primary" [disabled]="customerForm.invalid">Actualizar</button>
+    <button class="btn btn-outline-dark" [routerLink]="['/customer/lista']">Cancelar</button>    
   </form>
 </div>

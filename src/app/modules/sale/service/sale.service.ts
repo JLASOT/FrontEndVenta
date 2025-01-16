@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { URL_SERVICIOS } from 'src/app/config/config'; // Asegúrate de que la ruta sea correcta
+import { URL_SERVICIOS } from 'src/app/config/config'; 
 
 export interface Sale {
   idSale: number;
@@ -22,7 +22,7 @@ export interface SaleDetail {
 const httpOptions = (token: string) => ({
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}` // Asegúrate de enviar el token correctamente
+    'Authorization': `Bearer ${token}` 
   })
 });
 
